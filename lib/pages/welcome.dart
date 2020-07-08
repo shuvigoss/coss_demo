@@ -11,35 +11,11 @@ class WelcomePage extends StatelessWidget {
             margin: EdgeInsets.only(top: 84, bottom: 46),
             child: Column(
               children: <Widget>[
-                Text(
-                  '移动电子签名',
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: Color.fromRGBO(
-                        102,
-                        102,
-                        102,
-                        1,
-                      ),
-                      letterSpacing: 4,
-                      fontWeight: FontWeight.w500,
-                      decoration: TextDecoration.none),
-                ),
+                buildText('移动电子签名', 30, FontWeight.w500),
                 Container(
                   height: 7,
                 ),
-                Text('随时 随地 随签',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Color.fromRGBO(
-                          102,
-                          102,
-                          102,
-                          1,
-                        ),
-                        fontWeight: FontWeight.normal,
-                        letterSpacing: 4,
-                        decoration: TextDecoration.none))
+                buildText('随时 随地 随签', 18, FontWeight.normal)
               ],
             ),
           ),
@@ -51,6 +27,23 @@ class WelcomePage extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Text buildText(String text, double fontSize, FontWeight weight) {
+    return Text(
+      text,
+      style: TextStyle(
+          fontSize: fontSize,
+          color: Color.fromRGBO(
+            102,
+            102,
+            102,
+            1,
+          ),
+          letterSpacing: 4,
+          fontWeight: weight,
+          decoration: TextDecoration.none),
     );
   }
 }
