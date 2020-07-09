@@ -1,3 +1,4 @@
+import 'package:coss_demo/pages/widgets/countdown_btn.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -11,6 +12,16 @@ class WelcomePage extends StatelessWidget {
             margin: EdgeInsets.only(top: 84, bottom: 46),
             child: Column(
               children: <Widget>[
+                Container(
+                  alignment: Alignment.centerRight,
+                  padding: EdgeInsets.only(right: 18),
+                  child: CountDownBtn(
+                    title: '跳过',
+                    callBack: () {
+                      print('跳过');
+                    },
+                  ),
+                ),
                 buildText('移动电子签名', 30, FontWeight.w500),
                 Container(
                   height: 7,
