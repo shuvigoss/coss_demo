@@ -12,6 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '协同签名',
       home: WelcomePage(),
+      theme: ThemeData(
+          primaryColor: Colors.white,
+          scaffoldBackgroundColor: Color.fromRGBO(248, 248, 248, 1)),
     );
   }
 }

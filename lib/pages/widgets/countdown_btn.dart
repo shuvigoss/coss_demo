@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CountDownBtn extends StatefulWidget {
   String title;
   int countdown;
@@ -38,6 +39,7 @@ class _CountDownBtnState extends State<CountDownBtn> {
   @override
   // ignore: must_call_super
   void dispose() {
+    super.dispose();
     _timer?.cancel();
   }
 
@@ -52,18 +54,3 @@ class _CountDownBtnState extends State<CountDownBtn> {
     );
   }
 }
-
-//@override
-//Widget build(BuildContext context) {
-//  this.context = context;
-//  return FlatButton(
-//    textColor: widget.color,
-//    child: Text(widget.title + ' ($_countDown)'),
-//    shape: RoundedRectangleBorder(
-//        borderRadius: BorderRadius.circular(15.0),
-//        side: BorderSide(color: widget.color)),
-//    onPressed: () {
-//      widget.onClick(context);
-//    },
-//  );
-//}

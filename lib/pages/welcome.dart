@@ -1,3 +1,4 @@
+import 'package:coss_demo/pages/config_index.dart';
 import 'package:coss_demo/pages/widgets/countdown_btn.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class WelcomePage extends StatelessWidget {
                   child: CountDownBtn(
                     title: '跳过',
                     callBack: () {
-                      print('跳过');
+                      gotoConfigIndex(context);
                     },
                   ),
                 ),
@@ -38,6 +39,24 @@ class WelcomePage extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  void gotoConfigIndex(BuildContext context) {
+//    Navigator.push(
+//        context, MaterialPageRoute(builder: (context) => ConfigIndexPage()));
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+          pageBuilder: (
+            context,
+            animation,
+            secondaryAnimation,
+          ) =>
+              ConfigIndexPage(),
+          transitionsBuilder: (context, Animation<double> animation,
+                  secondaryAnimation, Widget child) =>
+              FadeTransition(opacity: animation, child: child)),
     );
   }
 
