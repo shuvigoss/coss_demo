@@ -1,6 +1,13 @@
 import 'package:coss_demo/pages/widgets/image_btn.dart';
 import 'package:flutter/material.dart';
 
+import 'models/config_item.dart';
+
+final List<ConfigItem> list = [
+  ConfigItem('测试1', 'http://127.0.0.1'),
+  ConfigItem('测试2', 'http://127.0.0.2')
+];
+
 class ConfigIndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -10,9 +17,34 @@ class ConfigIndexPage extends StatelessWidget {
         ),
         body: Container(
           child: Column(
-            children: <Widget>[buildTop()],
+            children: <Widget>[buildTop(), buildConfigList()],
           ),
         ));
+  }
+
+  Expanded buildConfigList() {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.only(top: 10),
+        color: Colors.white,
+        child: ListView.separated(
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: Image.asset('images/fuwuliebiao.png'),
+                title: Text(list[index].name),
+                subtitle: Text(list[index].url),
+              );
+            },
+            separatorBuilder: (context, index) {
+              return Container(
+                margin: EdgeInsets.only(left: 18, right: 18),
+                height: 1,
+                color: Colors.grey,
+              );
+            },
+            itemCount: list.length),
+      ),
+    );
   }
 
   Container buildTop() {
