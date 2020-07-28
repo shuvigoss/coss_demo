@@ -1,4 +1,9 @@
+import 'package:coss_demo/bloc/config_bloc.dart';
+import 'package:coss_demo/bloc/config_event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'models/config_item.dart';
 
 class ConfigPage extends StatelessWidget {
   final GlobalKey _key = GlobalKey<FormState>();
@@ -22,14 +27,14 @@ class ConfigPage extends StatelessWidget {
                 buildForm(),
               ],
             ),
-            buildSubmitBtn()
+            buildSubmitBtn(context)
           ],
         ),
       ),
     );
   }
 
-  Positioned buildSubmitBtn() {
+  Positioned buildSubmitBtn(context) {
     return Positioned(
       width: 200,
       height: 36,
@@ -45,15 +50,17 @@ class ConfigPage extends StatelessWidget {
             '完成',
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: _submit,
+          onPressed: () => _submit(context),
         ),
       ),
     );
   }
 
-  _submit() {
+  _submit(context) {
     if ((_key.currentState as FormState).validate()) {
-      print('成功');
+      BlocProvider.of<ConfigBloc>(context)
+          .add(Add(ConfigItem(_btext.text, _stext.text)));
+      Navigator.pop(context);
     }
   }
 

@@ -1,12 +1,7 @@
+import 'package:coss_demo/bloc/bloc.dart';
 import 'package:coss_demo/pages/widgets/image_btn.dart';
 import 'package:flutter/material.dart';
-
-import 'models/config_item.dart';
-
-final List<ConfigItem> list = [
-  ConfigItem('测试1', 'http://127.0.0.1'),
-  ConfigItem('测试2', 'http://127.0.0.2')
-];
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ConfigIndexPage extends StatelessWidget {
   @override
@@ -27,22 +22,42 @@ class ConfigIndexPage extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(top: 10),
         color: Colors.white,
-        child: ListView.separated(
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: Image.asset('images/fuwuliebiao.png'),
-                title: Text(list[index].name),
-                subtitle: Text(list[index].url),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(left: 18, right: 18),
-                height: 1,
-                color: Colors.grey,
-              );
-            },
-            itemCount: list.length),
+        child: BlocBuilder<ConfigBloc, ConfigState>(builder: (context, state) {
+          if (state is Failure) {
+            return Center(child: Text('加载异常了...'));
+          }
+
+          if (state is Loaded) {
+            if (state.items.length == 0) {
+              return Center(child: Text('暂无数据'));
+            }
+
+            return Container(
+                child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: Image.asset('images/fuwuliebiao.png'),
+                        title: Text(state.items[index].name),
+                        subtitle: Text(state.items[index].url),
+                        trailing: IconButton(
+                          onPressed: () =>
+                              delete(context, state.items[index].name),
+                          icon: Icon(Icons.delete),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return Divider(
+                        height: 1,
+                      );
+                    },
+                    itemCount: state.items.length));
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        }),
       ),
     );
   }
@@ -71,5 +86,9 @@ class ConfigIndexPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  delete(BuildContext context, String name) {
+    BlocProvider.of<ConfigBloc>(context).add(Delete(name));
   }
 }
