@@ -1,3 +1,4 @@
+import 'package:coss_demo/pages/config.dart';
 import 'package:coss_demo/pages/welcome.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Colors.white,
           scaffoldBackgroundColor: Color.fromRGBO(248, 248, 248, 1)),
+      routes: {'/config': (context) => ConfigPage()},
     );
   }
 }

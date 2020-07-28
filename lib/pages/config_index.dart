@@ -17,7 +17,7 @@ class ConfigIndexPage extends StatelessWidget {
         ),
         body: Container(
           child: Column(
-            children: <Widget>[buildTop(), buildConfigList()],
+            children: <Widget>[buildTop(context), buildConfigList()],
           ),
         ));
   }
@@ -47,7 +47,7 @@ class ConfigIndexPage extends StatelessWidget {
     );
   }
 
-  Container buildTop() {
+  Container buildTop(context) {
     return Container(
       color: Colors.white,
       height: 135,
@@ -56,7 +56,7 @@ class ConfigIndexPage extends StatelessWidget {
         children: <Widget>[
           Container(
             child: ImageBtn('images/shoudongluru.png', '手动录入', () {
-              print('shoudongluru');
+              Navigator.pushNamed(context, '/config');
             }),
           ),
           Container(
